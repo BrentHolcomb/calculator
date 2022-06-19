@@ -164,6 +164,8 @@ function divideSection(array) {
     divideRemove = divideRemove.reduce((total, current) => {
         if (total === 0) {
             return current;
+        } else if (current === 0) {
+            return NaN;
         } else {
             return total / current;
         }
@@ -185,5 +187,9 @@ function multiplySection(array) {
 function operate(displayValue) {
     let displayValueArray = displayValue.split("");
     displayValueArray.unshift("0");
-    return addSection(displayValueArray);
+    let calculated = addSection(displayValueArray);
+    if (!calculated && calculated !== 0) {
+        return "You broke it.";
+    }
+    return (Math.round(calculated * 1000))/1000;
 }
